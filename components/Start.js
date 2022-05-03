@@ -1,24 +1,47 @@
 import React from 'react';
-import { View, Text, Button, TextInput, StyleSheet, ImageBackground } from 'react-native';
-
+import { View, Text, Button, TextInput, StyleSheet, ImageBackground, TouchableOpacity, Pressable } from 'react-native';
+//Importing Background Image from assets folder
 import BackgroundImage from "../assets/BackgroundImage.png";
+
+//Background Colors to Choose from
+const colors = {
+    black: "#090C08",
+    purple: "#474056",
+    grey: "#8A95A5",
+    green: "#B9C6AE",
+};
 
 export default class Start extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: "" };
+
+        this.state = {
+            name: "",
+        };
     }
 
+    // Function to Update the State with the new Background Color for Chat Screen Chosen by the User
+    changeBgColor = (newColor) => {
+        this.setState({ bgColor: newColor });
+    };
+
+    // //Background Colors to Choose from
+    // colors = {
+    //     black: "#090C08",
+    //     purple: "#474056",
+    //     grey: "#8A95A5",
+    //     green: "#B9C6AE",
+    // };
+
     render() {
-        // let name = this.props.route.params.name;
-        // this.props.navigation.setOptions({ title: name });
         return (
             <View style={styles.container}>
                 <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.backgroundImage}>
+                    {/* Title Box */}
                     <View style={styles.titleBox}>
-                        <Text style={styles.title}>Chat App !!</Text>
+                        <Text style={styles.title}>Chat App !</Text>
                     </View>
-
+                    {/* "What's your name?" Box */}
                     <View style={styles.yourNameBox}>
                         <TextInput
                             style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
@@ -27,19 +50,38 @@ export default class Start extends React.Component {
                             placeholder="What is your name?"
                         />
                     </View>
-                    <View styles={styles.yourName}>
 
+                    <Text style={styles.text}>Choose Background Color:</Text>
+                    {/* Color Array Box */}
+                    <View style={styles.colorArray}>
+                        <TouchableOpacity
+                            style={styles.black}
+                            onPress={() => this.changeBgColor(this.colors.black)}
+                        ></TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.purple}
+                            onPress={() => this.changeBgColor(this.colors.purple)}
+                        ></TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.grey}
+                            onPress={() => this.changeBgColor(this.colors.grey)}
+                        ></TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.green}
+                            onPress={() => this.changeBgColor(this.colors.green)}
+                        ></TouchableOpacity>
                     </View>
-                    <View styles={styles.chooseYourBackgroundColor}>
 
-                    </View>
-
-                    <Button
+                    {/* Button Box */}
+                    <Pressable
+                        style={styles.button}
                         title="Go to Chat"
                         onPress={() =>
                             this.props.navigation.navigate("Chat", { name: this.state.name })
                         }
-                    />
+                    >
+                        <Text style={styles.buttonText}>Start Chatting</Text>
+                    </Pressable>
                 </ImageBackground>
             </View>
         )
@@ -59,30 +101,87 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'white',
-        fontSize: 42,
-        lineHeight: 84,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        backgroundColor: 'black'
+        color: '#757083',
+        fontSize: 16,
+        fontWeight: '300',
+        paddingVertical: 10,
     },
 
-
     titleBox: {
-        flex: 1,
-        justifyContent: 'center',
+        height: "40%",
+        width: "88%",
+        alignItems: "center",
+        paddingTop: 100,
+        borderRadius: 44,
     },
 
     title: {
         fontSize: 30,
         fontWeight: 'bold',
+        height: 300,
     },
 
     yourNameBox: {
         borderWidth: 2,
+        width: 200,
+        borderRadius: 100,
     },
 
     yourName: {
+        borderWidth: 2,
+        width: 200,
+        borderRadius: 100,
+    },
 
-    }
+    colorArray: {
+        flex: 1,
+        justifyContent: 'center',
+        width: "80%",
+        flexDirection: "row",
+        justifyContent: "space-around"
+    },
+
+    black: {
+        backgroundColor: "#090C08",
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+    },
+
+    purple: {
+        backgroundColor: "#474056",
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+    },
+
+    grey: {
+        backgroundColor: "#8A95A5",
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+    },
+
+    green: {
+        backgroundColor: "#B9C6AE",
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+    },
+
+    button: {
+        width: "88%",
+        height: 70,
+        borderRadius: 8,
+        backgroundColor: "#757083",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 10
+    },
+
+    buttonText: {
+        color: "#FFFFFF",
+        fontSize: 16,
+        fontWeight: "600",
+    },
 });

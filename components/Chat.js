@@ -4,6 +4,11 @@ import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 
 export default class Chat extends React.Component {
     render() {
+        let name = this.props.route.params.name;
+        this.props.navigation.setOptions({ title: name });
+
+        let newColor = this.props.route.params.newColor;
+        this.props.navigation.setOptions({ color: newColor });
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -16,6 +21,7 @@ export default class Chat extends React.Component {
     }
 }
 
+//Styles of this Screen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -27,13 +33,4 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center"
     },
-
-    // text: {
-    //     color: 'white',
-    //     fontSize: 42,
-    //     lineHeight: 84,
-    //     fontWeight: 'bold',
-    //     textAlign: 'center',
-    //     backgroundColor: 'black'
-    // }
 });

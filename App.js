@@ -6,35 +6,31 @@ import Start from './components/Start';
 // import react native gesture handler
 import 'react-native-gesture-handler';
 
-// import react Navigation
+
 import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-// Create the navigator
-// const Stack = createStackNavigator();
-
-const Tab = createBottomTabNavigator();
-
+//Create the navigator
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
 
   render() {
     return (
       <NavigationContainer>
-        <Tab.Navigator
+        <Stack.Navigator
           initialRouteName="Start"
         >
-          <Tab.Screen
+          <Stack.Screen
             name="Start"
             component={Start}
           />
-          <Tab.Screen
+          <Stack.Screen
             name="Chat"
             component={Chat}
           />
-        </Tab.Navigator>
+        </Stack.Navigator>
       </NavigationContainer>
     );
   }
