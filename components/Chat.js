@@ -94,13 +94,15 @@ export class Chat extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: "center",
+        justifyContent: "center",
     },
-
-    button: {
+    giftedChat: {
         flex: 1,
-        justifyContent: "center"
+        width: "75%",
+        paddingBottom: 10,
+        justifyContent: "center",
+        borderRadius: 5,
     },
 });
 

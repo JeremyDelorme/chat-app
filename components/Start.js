@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
     },
 
     yourNameBox: {
-        borderWidth: 2,
         width: 200,
         borderRadius: 100,
     },
@@ -136,7 +135,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: "80%",
         flexDirection: "row",
-        justifyContent: "space-around"
     },
 
     black: {
