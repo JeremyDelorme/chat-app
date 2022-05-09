@@ -1,22 +1,16 @@
 import React from 'react';
-import { View, Text, Button, TextInput, StyleSheet, ImageBackground, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ImageBackground, TouchableOpacity, Pressable } from 'react-native';
 //Importing Background Image from assets folder
 import BackgroundImage from "../assets/BackgroundImage.png";
 
-//Background Colors to Choose from
-const colors = {
-    black: "#090C08",
-    purple: "#474056",
-    grey: "#8A95A5",
-    green: "#B9C6AE",
-};
-
+//Extending the Start component from App.js
 export default class Start extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             name: "",
+            bgColor: this.colors.green,
         };
     }
 
@@ -25,22 +19,25 @@ export default class Start extends React.Component {
         this.setState({ bgColor: newColor });
     };
 
-    // //Background Colors to Choose from
-    // colors = {
-    //     black: "#090C08",
-    //     purple: "#474056",
-    //     grey: "#8A95A5",
-    //     green: "#B9C6AE",
-    // };
+    //Background Colors to choose from
+    colors = {
+        black: "#090C08",
+        purple: "#474056",
+        grey: "#8A95A5",
+        green: "#B9C6AE",
+    };
 
     render() {
         return (
+            //All components to create the color arrays, titles and buttons.
             <View style={styles.container}>
                 <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.backgroundImage}>
+
                     {/* Title Box */}
                     <View style={styles.titleBox}>
-                        <Text style={styles.title}>Chat App !</Text>
+                        <Text style={styles.title}>Welcome To The Super Chat App !</Text>
                     </View>
+
                     {/* "What's your name?" Box */}
                     <View style={styles.yourNameBox}>
                         <TextInput
@@ -52,6 +49,7 @@ export default class Start extends React.Component {
                     </View>
 
                     <Text style={styles.text}>Choose Background Color:</Text>
+
                     {/* Color Array Box */}
                     <View style={styles.colorArray}>
                         <TouchableOpacity
@@ -75,11 +73,10 @@ export default class Start extends React.Component {
                     {/* Button Box */}
                     <Pressable
                         style={styles.button}
-                        title="Go to Chat"
-                        onPress={() =>
-                            this.props.navigation.navigate("Chat", { name: this.state.name })
-                        }
-                    >
+                        onPress={() => this.props.navigation.navigate('Chat', {
+                            name: this.state.name,
+                            bgColor: this.state.bgColor
+                        })}>
                         <Text style={styles.buttonText}>Start Chatting</Text>
                     </Pressable>
                 </ImageBackground>
@@ -88,6 +85,7 @@ export default class Start extends React.Component {
     }
 }
 
+//Styles of this Screen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
