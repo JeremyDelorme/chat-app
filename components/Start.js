@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
         width: '88%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
+
     },
 
     black: {
