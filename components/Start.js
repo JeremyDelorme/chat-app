@@ -32,55 +32,56 @@ export default class Start extends React.Component {
             //All components to create the color arrays, titles and buttons.
             <View style={styles.container}>
                 <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.backgroundImage}>
-
                     {/* Title Box */}
-                    <View style={styles.titleBox}>
-                        <Text style={styles.title}>Welcome To The Super Chat App !</Text>
+                    <Text style={styles.title}>Welcome To The Super Chat App !</Text>
+                    <View style={styles.whiteSquare}>
+                        {/* "What's your name?" Box */}
+                        <View style={styles.yourNameBox}>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={(text) => this.setState({ name: text })}
+                                value={this.state.name}
+                                placeholder="What is your name?"
+                            />
+                        </View>
+
+                        <View style={styles.chooseBgColorBox}>
+                            <Text style={styles.chooseBgColor}>Choose Background Color</Text>
+                        </View>
+
+                        {/* Color Array Box */}
+                        <View style={styles.colorArray}>
+                            <TouchableOpacity
+                                style={styles.black}
+                                onPress={() => this.changeBgColor(this.colors.black)}
+                            ></TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.purple}
+                                onPress={() => this.changeBgColor(this.colors.purple)}
+                            ></TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.grey}
+                                onPress={() => this.changeBgColor(this.colors.grey)}
+                            ></TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.green}
+                                onPress={() => this.changeBgColor(this.colors.green)}
+                            ></TouchableOpacity>
+                        </View>
+
+                        {/* Button Box */}
+                        <Pressable
+                            style={styles.button}
+                            onPress={() => this.props.navigation.navigate('Chat', {
+                                name: this.state.name,
+                                bgColor: this.state.bgColor
+                            })}>
+                            <Text style={styles.buttonText}>Start Chatting</Text>
+                        </Pressable>
                     </View>
 
-                    {/* "What's your name?" Box */}
-                    <View style={styles.yourNameBox}>
-                        <TextInput
-                            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                            onChangeText={(text) => this.setState({ name: text })}
-                            value={this.state.name}
-                            placeholder="What is your name?"
-                        />
-                    </View>
-
-                    <Text style={styles.text}>Choose Background Color:</Text>
-
-                    {/* Color Array Box */}
-                    <View style={styles.colorArray}>
-                        <TouchableOpacity
-                            style={styles.black}
-                            onPress={() => this.changeBgColor(this.colors.black)}
-                        ></TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.purple}
-                            onPress={() => this.changeBgColor(this.colors.purple)}
-                        ></TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.grey}
-                            onPress={() => this.changeBgColor(this.colors.grey)}
-                        ></TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.green}
-                            onPress={() => this.changeBgColor(this.colors.green)}
-                        ></TouchableOpacity>
-                    </View>
-
-                    {/* Button Box */}
-                    <Pressable
-                        style={styles.button}
-                        onPress={() => this.props.navigation.navigate('Chat', {
-                            name: this.state.name,
-                            bgColor: this.state.bgColor
-                        })}>
-                        <Text style={styles.buttonText}>Start Chatting</Text>
-                    </Pressable>
                 </ImageBackground>
-            </View>
+            </View >
         )
     }
 }
@@ -93,93 +94,107 @@ const styles = StyleSheet.create({
 
     backgroundImage: {
         flex: 1,
-        width: "100%",
+        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-evenly",
     },
 
-    text: {
-        color: '#757083',
-        fontSize: 16,
-        fontWeight: '300',
-        paddingVertical: 10,
-    },
-
-    titleBox: {
-        height: "40%",
+    whiteSquare: {
+        backgroundColor: "white",
+        height: "46%",
         width: "88%",
+        justifyContent: "space-around",
         alignItems: "center",
-        paddingTop: 100,
-        borderRadius: 44,
     },
-
     title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        height: 300,
+        fontSize: 45,
+        fontWeight: '600',
+        color: '#FFFFFF',
     },
 
     yourNameBox: {
-        borderWidth: 2,
-        width: 200,
-        borderRadius: 100,
+        fontSize: 16,
+        fontWeight: "300",
+        color: "#757083",
+        opacity: 0.5,
     },
 
-    yourName: {
-        borderWidth: 2,
-        width: 200,
-        borderRadius: 100,
+    input: {
+        height: 50,
+        width: '88%',
+        fontSize: 16,
+        fontWeight: '800',
+        color: '#000000',
+        borderColor: 'gray',
+        borderWidth: 1,
+        paddingHorizontal: 10,
+        backgroundColor: "#FFFFFF",
+        opacity: 100,
+        borderRadius: 50,
+    },
+
+    chooseBgColorBox: {
+        height: 50,
+        width: '60%',
+        color: '#000000',
+        borderRadius: 50,
+        justifyContent: 'center'
+    },
+
+    chooseBgColor: {
+        fontSize: 16,
+        fontWeight: "600",
+        color: "#757083",
+        opacity: 1,
+        textAlign: 'center',
+        justifyContent: 'center'
     },
 
     colorArray: {
-        flex: 1,
-        justifyContent: 'center',
-        width: "80%",
-        flexDirection: "row",
-        justifyContent: "space-around"
+        width: '88%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
     },
 
     black: {
         backgroundColor: "#090C08",
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
     },
 
     purple: {
         backgroundColor: "#474056",
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
     },
 
     grey: {
         backgroundColor: "#8A95A5",
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
     },
 
     green: {
         backgroundColor: "#B9C6AE",
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
     },
 
     button: {
-        width: "88%",
-        height: 70,
-        borderRadius: 8,
+        height: 50,
+        width: '88%',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: "#757083",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingVertical: 10
     },
 
     buttonText: {
-        color: "#FFFFFF",
+        color: '#ffffff',
         fontSize: 16,
-        fontWeight: "600",
-    },
+        fontWeight: '600',
+    }
 });
