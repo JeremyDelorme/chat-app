@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, Platform, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { View, Platform, KeyboardAvoidingView, StyleSheet, Text, Button, Flatlist } from 'react-native';
 //Importing external library "Gifted-Chat"
-import { GiftedChat, Bubble } from 'react-native-gifted-chat'
+import { GiftedChat, Bubble, SystemMessage, Day, InputToolbar, SendButton, LeftAction, ChatInput } from 'react-native-gifted-chat';
+
+const firebase = require('firebase');
+require('firebase/firestore');
 
 //Extending the Chat component from App.js
 export class Chat extends Component {
@@ -9,8 +12,54 @@ export class Chat extends Component {
         super();
         this.state = {
             messages: [],
+            uid: 0,
+            user: {
+                _id: "",
+                name: "",
+                avatar: "",
+            },
+            isConnected: false,
+            image: null,
+            location: null
+        };
+
+        // SDK from Firestore
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6yIzEjqukhQIsrzf1vDoLiufR9ZMCr3I",
+            authDomain: "chat-app-b008f.firebaseapp.com",
+            projectId: "chat-app-b008f",
+            storageBucket: "chat-app-b008f.appspot.com",
+            messagingSenderId: "192313512553",
+            appId: "1:192313512553:web:2c621cf9609e26c1a788f8",
+            measurementId: "G-YFKF19TQ21"
+        };
+
+        // initializes the Firestore app
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
         }
+
+        //refernces the database
+        this.referenceChatMessages = firebase.firestore().collection("messages");
+
     }
+    onCollectionUpdate = (querySnapshot) => {
+        const messages = [];
+        // go through each document
+        querySnapshot.forEach((doc) => {
+            // get the QueryDocumentSnapshot's data
+            let data = doc.data();
+            messages.push({
+                _id: data._id,
+                text: data.text,
+                createdAt: data.createdAt.toDate(),
+                user: data.user,
+            });
+        });
+        this.setState({
+            messages,
+        });
+    };
 
     componentDidMount() {
         // Takes the username fro Start.js and assigns it to the variable "name"
@@ -106,4 +155,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Chat 
+export default Chat;
