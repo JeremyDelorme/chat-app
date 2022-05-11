@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Platform, KeyboardAvoidingView, StyleSheet, Text, Button, Flatlist } from 'react-native';
-//Importing external library "Gifted-Chat"
+//Imports External Library "Gifted-Chat"
 import { GiftedChat, Bubble, SystemMessage, Day, InputToolbar, SendButton, LeftAction, ChatInput } from 'react-native-gifted-chat';
 
 const firebase = require('firebase');
 require('firebase/firestore');
 
-//Extending the Chat component from App.js
+//Extends The Chat Component From App.js
 export class Chat extends Component {
     constructor() {
         super();
@@ -18,9 +18,6 @@ export class Chat extends Component {
                 name: "",
                 avatar: "",
             },
-            isConnected: false,
-            image: null,
-            location: null
         };
 
         // SDK from Firestore
@@ -34,20 +31,48 @@ export class Chat extends Component {
             measurementId: "G-YFKF19TQ21"
         };
 
-        // initializes the Firestore app
+        // Initializes the Firestore app
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
 
-        //refernces the database
+        //References The Database
         this.referenceChatMessages = firebase.firestore().collection("messages");
 
     }
+
+    componentDidMount() {
+        // Takes The Username From Start.js And Assigns It To The Variable "name"
+        let name = this.props.route.params.name;
+        this.props.navigation.setOptions({ title: name });
+
+        this.authUnsubscribe = firebase
+            .auth()
+            .onAuthStateChanged(async (user) => {
+                if (!user) {
+                    return await firebase.auth().signInAnonymously();
+                }
+                //Sets The State For Messages And Username
+                this.setState({
+                    uid: user.uid,
+                    messages: [],
+                    user: {
+                        _id: user.uid,
+                        name: name,
+                        avatar: "",
+                    },
+                });
+                this.unsubscribe = this.referenceChatMessages
+                    .orderBy('createdAt', 'desc')
+                    .onSnapshot(this.onCollectionUpdate);
+            });
+    }
+
     onCollectionUpdate = (querySnapshot) => {
         const messages = [];
-        // go through each document
+        // Goes Through Each Document
         querySnapshot.forEach((doc) => {
-            // get the QueryDocumentSnapshot's data
+            // Gets The QueryDocumentSnapshot's Data
             let data = doc.data();
             messages.push({
                 _id: data._id,
@@ -61,39 +86,32 @@ export class Chat extends Component {
         });
     };
 
-    componentDidMount() {
-        // Takes the username fro Start.js and assigns it to the variable "name"
-        let name = this.props.route.params.name;
-
-        //Sets the state for messages and username
-        this.setState({
-            messages: [
-                //Initial static message to welcome the user
-                {
-                    _id: 1,
-                    text: "Hello " + name + " :)",
-                    createdAt: new Date(),
-                    user: {
-                        _id: 2,
-                        name: 'React Native',
-                        avatar: 'https://placeimg.com/140/140/any',
-                    },
-                },
-                //System message informing about when user was last active
-                {
-                    _id: 2,
-                    text: name + " has entered the chat",
-                    createdAt: new Date(),
-                    system: true,
-                },
-            ],
-        })
+    //Adds Messages To The Database
+    addMessages() {
+        const message = this.state.messages[0];
+        // Adds The New Messages To The Collection
+        this.referenceChatMessages.add({
+            uid: this.state.uid,
+            _id: message._id,
+            text: message.text || '',
+            createdAt: message.createdAt,
+            user: this.state.user,
+        });
     }
 
     onSend(messages = []) {
-        this.setState(previousState => ({
+        this.setState((previousState) => ({
             messages: GiftedChat.append(previousState.messages, messages),
-        }));
+        }), () => {
+            this.addMessages();
+        });
+    }
+
+    componentWillUnmount() {
+        // Stops Listening For Changes
+        this.unsubscribe();
+        // Stops Listening To Authentication
+        this.authUnsubscribe();
     }
 
     renderBubble(props) {
@@ -102,7 +120,7 @@ export class Chat extends Component {
                 {...props}
                 wrapperStyle={{
                     right: {
-                        backgroundColor: '#c18a16'
+                        // backgroundColor: '#c18a16'
                     }
                 }}
             />
