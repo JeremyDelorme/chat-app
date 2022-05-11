@@ -123,7 +123,7 @@ export class Chat extends Component {
                         backgroundColor: '#c18a16'
                     },
                     left: {
-                        backgroundColor: '#'
+                        backgroundColor: '#F1D256'
                     }
                 }}
             />
