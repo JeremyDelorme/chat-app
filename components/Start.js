@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, ImageBackground, TouchableOpacity, Pressable } from 'react-native';
-//Importing Background Image from assets folder
+//Imports Background Image From Assets Folder
 import BackgroundImage from "../assets/BackgroundImage.png";
 
-//Extending the Start component from App.js
+//Extending The Start Component From App.js
 export default class Start extends React.Component {
     constructor(props) {
         super(props);
@@ -14,12 +14,12 @@ export default class Start extends React.Component {
         };
     }
 
-    // Function to Update the State with the new Background Color for Chat Screen Chosen by the User
+    // Updates The State With The New Background Color For The Chat Screen Chosen by the User
     changeBgColor = (newColor) => {
         this.setState({ bgColor: newColor });
     };
 
-    //Background Colors to choose from
+    //Background Colors To Choose From
     colors = {
         black: "#090C08",
         purple: "#474056",
@@ -29,7 +29,7 @@ export default class Start extends React.Component {
 
     render() {
         return (
-            //All components to create the color arrays, titles and buttons.
+            //All Components
             <View style={styles.container}>
                 <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.backgroundImage}>
                     {/* Title Box */}
