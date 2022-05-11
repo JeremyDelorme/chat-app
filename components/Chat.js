@@ -120,7 +120,10 @@ export class Chat extends Component {
                 {...props}
                 wrapperStyle={{
                     right: {
-                        // backgroundColor: '#c18a16'
+                        backgroundColor: '#c18a16'
+                    },
+                    left: {
+                        backgroundColor: '#'
                     }
                 }}
             />
