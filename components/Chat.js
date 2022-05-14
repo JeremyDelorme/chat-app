@@ -3,6 +3,8 @@ import { View, Platform, KeyboardAvoidingView, StyleSheet, Text, Button, Flatlis
 //Imports External Library "Gifted-Chat"
 import { GiftedChat, Bubble, SystemMessage, Day, InputToolbar, SendButton, LeftAction, ChatInput } from 'react-native-gifted-chat';
 import NetInfo from '@react-native-community/netinfo';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const firebase = require('firebase');
 require('firebase/firestore');
@@ -19,6 +21,9 @@ export class Chat extends Component {
                 name: "",
                 avatar: "",
             },
+            isConnected: false,
+            // image: null,
+            // location: null,
         };
 
         // SDK from Firestore
@@ -161,6 +166,7 @@ export class Chat extends Component {
                     name: data.user.name,
                     avatar: data.user.avatar,
                 },
+
             });
         });
         this.setState({
@@ -235,6 +241,7 @@ export class Chat extends Component {
                 <GiftedChat
                     renderBubble={this.renderBubble.bind(this)}
                     renderInputToolbar={this.renderInputToolbar.bind(this)}
+                    // renderActions={this.renderCustomActions}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
                     user={{

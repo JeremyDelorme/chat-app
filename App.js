@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import Chat from './components/Chat';
 import Start from './components/Start';
+// import CustomActions from './CustomActions';
 
 // import react native gesture handler
 import 'react-native-gesture-handler';
@@ -16,6 +17,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 export default class App extends React.Component {
+
+  // renderCustomActions = (props) => {
+  //   return <CustomActions {...props} />;
+  // };
 
   render() {
     return (
