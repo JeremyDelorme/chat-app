@@ -5,6 +5,8 @@ import { GiftedChat, Bubble, SystemMessage, Day, InputToolbar, SendButton, LeftA
 import NetInfo from '@react-native-community/netinfo';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import CustomActions from "./CustomActions";
+import MapView from "react-native-maps";
 
 const firebase = require('firebase');
 require('firebase/firestore');
@@ -22,8 +24,8 @@ export class Chat extends Component {
                 avatar: "",
             },
             isConnected: false,
-            // image: null,
-            // location: null,
+            image: null,
+            location: null,
         };
 
         // SDK from Firestore
@@ -166,6 +168,8 @@ export class Chat extends Component {
                     name: data.user.name,
                     avatar: data.user.avatar,
                 },
+                image: data.image || null,
+                location: data.location || null,
 
             });
         });
@@ -206,6 +210,31 @@ export class Chat extends Component {
         }
     }
 
+    renderCustomActions = (props) => {
+        return <CustomActions {...props} />;
+    };
+
+    renderCustomView(props) {
+        const { currentMessage } = props;
+        if (currentMessage.location) {
+            return (
+                <View style={{ borderRadius: 13, overflow: 'hidden', margin: 3 }}>
+                    <MapView
+                        style={{ width: 150, height: 100 }}
+                        region={{
+                            latitude: currentMessage.location.latitude,
+                            longitude: currentMessage.location.longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    />
+                </View>
+            );
+        }
+        return null;
+    }
+
+
     //Adds Background Colors To The Chat Buubles (Left And Right)
     renderBubble(props) {
         return (
@@ -241,9 +270,10 @@ export class Chat extends Component {
                 <GiftedChat
                     renderBubble={this.renderBubble.bind(this)}
                     renderInputToolbar={this.renderInputToolbar.bind(this)}
-                    // renderActions={this.renderCustomActions}
+                    renderActions={this.renderCustomActions}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
+                    renderCustomView={this.renderCustomView}
                     user={{
                         _id: this.state.user._id,
                         name: this.state.name,
