@@ -255,7 +255,7 @@ export class Chat extends Component {
     render() {
         //Creating variable "name" for the username entered in the start screen
         let name = this.props.route.params.name;
-        this.props.navigation.setOptions({ title: name });
+        // this.props.navigation.setOptions({ title: name });
 
         //Creating variable "newColor" for the Chat screen' background color chosen by the user within the choices given
         let bgColor = this.props.route.params.bgColor;
