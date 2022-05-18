@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Platform, KeyboardAvoidingView, StyleSheet, Text, Button, Flatlist } from 'react-native';
+import { View, Platform, KeyboardAvoidingView, StyleSheet, Text, Button, Flatlist, TextInput } from 'react-native';
 //Imports External Library "Gifted-Chat"
 import { GiftedChat, Bubble, SystemMessage, Day, InputToolbar, SendButton, LeftAction, ChatInput } from 'react-native-gifted-chat';
 import NetInfo from '@react-native-community/netinfo';
@@ -147,9 +147,11 @@ export class Chat extends Component {
         this.referenceChatMessages.add({
             uid: this.state.uid,
             _id: message._id,
-            text: message.text || '',
+            text: message.text || "",
             createdAt: message.createdAt,
             user: this.state.user,
+            image: message.image || "",
+            location: message.location || null,
         });
     }
 
@@ -253,9 +255,9 @@ export class Chat extends Component {
     }
 
     render() {
-        //Creating variable "name" for the username entered in the start screen
-        let name = this.props.route.params.name;
-        // this.props.navigation.setOptions({ title: name });
+        // //Creating variable "name" for the username entered in the start screen
+        // let name = this.props.route.params.name;
+        // // this.props.navigation.setOptions({ title: name });
 
         //Creating variable "newColor" for the Chat screen' background color chosen by the user within the choices given
         let bgColor = this.props.route.params.bgColor;
@@ -272,7 +274,7 @@ export class Chat extends Component {
                     renderInputToolbar={this.renderInputToolbar.bind(this)}
                     renderActions={this.renderCustomActions}
                     messages={this.state.messages}
-                    onSend={messages => this.onSend(messages)}
+                    onSend={(messages) => this.onSend(messages)}
                     renderCustomView={this.renderCustomView}
                     user={{
                         _id: this.state.user._id,
