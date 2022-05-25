@@ -1,39 +1,32 @@
-# chat-app
- 
-DESCRIPTION
+CHAT-APP
 
-This project is t build a chat app for mobile devices using React Native. Users will have options to share their location and images.
-
-USER STORIES
-
-As a new user, I want to be able to enter the chat screen and communicate with people through it.
-
-As a user, I want to be able to send and receive messages.
-
-As a user, I want to be able send images.
-
-As a user, I want to be able to share my location with other users.
-
-As a user, I want to be able to access my messages offline.
-
-As a user with a visual impairment, I want to be able to use the app through a screen reader.
+Chat app for mobile devices using React Native. The app provides users with a chat interface and options to share images and their location.
 
 KEY FEATURES
+- Start page to allow users to enter a Username and select from 4 background colors
+- Chat screen where users can communicate via a single chatroom
+- Ability to send user saved pictures, new photos, or location data
+- Saved chats can be viewed offline
 
-A 'Start' page where users can enter their name and choose their background color for the Chatroom.
+TECHNOLOGIES
+- React Native
+- Expo
+- Google Firebase
+- Gifted Chat
 
-A 'Chat' page displaying the conversations, an input field and a submit button.
+INSTALLATION PREREQUESITS
+- Node.js and npm
+- Android Studio or Xcode for iOS
+- Expo / Expo Go
 
-The two features to be added are:
-    1. Sending images
-    2. Sharing the user's location
+INSTALLATION REQUIRED PACKAGES FROM PACKAGE.JSON
+- Download this repo
+- Navigate to root folder via CLI
+- Install required packages in package.json
 
-TECHNOLOGIES USED
-
-    1. React Native
-    2. XCode
-    3. Expo
-    4. React Navigation Library
-
-
-
+RUN THE APP
+- Navigate to root folder
+- Run expo start or npm start
+- Expo will build the project and display development options in a browser window.
+- The Expo Go app can be used to show the app on a physical device. Scan the QR Code in the development options with the app
+- The app can also be run through an emulator on your desktop via Expo

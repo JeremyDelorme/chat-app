@@ -31,6 +31,7 @@ export default class CustomActions extends React.Component {
         }
     };
 
+    // allow user to take a photo with camera app
     takePhoto = async () => {
         const { status } = await Permissions.askAsync(
             Permissions.CAMERA,
@@ -143,7 +144,7 @@ export default class CustomActions extends React.Component {
                 accessibilityLabel="Share options"
                 accessibilityHint="Choose to send an image, take a picture or share location"
                 style={styles.container}
-                onPress={this.onActionpress}
+                onPress={this.onActionPress}
             >
                 <View style={[styles.wrapper, this.props.wrapperStyle]}>
                     <Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text>
