@@ -1,32 +1,30 @@
-CHAT-APP
+# React Native Chat App
 
-Chat app for mobile devices using React Native. The app provides users with a chat interface and options to share images and their location.
+## Description
 
-KEY FEATURES
-- Start page to allow users to enter a Username and select from 4 background colors
-- Chat screen where users can communicate via a single chatroom
-- Ability to send user saved pictures, new photos, or location data
-- Saved chats can be viewed offline
+The aim of this project is to build a chat app for mobile devices using React Native. The app will provide users with a chat interface and options to share images and their location.
 
-TECHNOLOGIES
+## Technologies used:
 - React Native
 - Expo
 - Google Firebase
 - Gifted Chat
 
-INSTALLATION PREREQUESITS
+## Key Features
+- A page where users can enter their name and choose a background color for the chat screen before joining the chat.
+- A page displaying the conversation, as well as an input field and submit button.
+- The chat must provide users with two additional communication features: sending images and location data.
+- Data gets stored online and offline.
+
+## Installation Prerequisites
 - Node.js and npm
 - Android Studio or Xcode for iOS
 - Expo / Expo Go
 
-INSTALLATION REQUIRED PACKAGES FROM PACKAGE.JSON
-- Download this repo
-- Navigate to root folder via CLI
-- Install required packages in package.json
+## Setup
 
-RUN THE APP
-- Navigate to root folder
-- Run expo start or npm start
-- Expo will build the project and display development options in a browser window.
-- The Expo Go app can be used to show the app on a physical device. Scan the QR Code in the development options with the app
-- The app can also be run through an emulator on your desktop via Expo
+- Download this repo.
+- In your CLI, navigate to the root directory of the project.
+- Run npm install to install all the dependencies.
+- Run npm start or expo start in terminal to start local server
+- Install Expo Go on a smartphone or use an emulator (Android Studio) to start the app trough Expo
