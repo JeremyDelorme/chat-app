@@ -31,8 +31,8 @@ The aim of this project is to build a chat app for mobile devices using React Na
 
 ## WHAT IT LOOKS LIKE
 
-![screenshot_1](img/Screenshot_1.png)
+![screenshot_1](img/image_1.png)
 
-![screenshot_2](img/Screenshot_2.png)
+![screenshot_2](img/image_1.png)
 
 
