@@ -35,3 +35,4 @@ The aim of this project is to build a chat app for mobile devices using React Na
 
 ![screenshot_2](img/screenshot_2.png)
 
+
