@@ -28,3 +28,10 @@ The aim of this project is to build a chat app for mobile devices using React Na
 - Run npm install to install all the dependencies.
 - Run npm start or expo start in terminal to start local server
 - Install Expo Go on a smartphone or use an emulator (Android Studio) to start the app trough Expo
+
+## WHAT IT LOOKS LIKE
+
+![screenshot_2](img/screenshot_1.png)
+
+![screenshot_2](img/screenshot_2.png)
+
